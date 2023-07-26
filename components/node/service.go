@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
+	"github.com/kroma-network/kroma/components/node/rollup/sync"
 	"io"
 	"os"
 	"strings"
@@ -55,6 +56,8 @@ func NewConfig(ctx *cli.Context, log log.Logger) (*node.Config, error) {
 
 	l2SyncEndpoint := NewL2SyncEndpointConfig(ctx)
 
+	syncConfig := NewSyncConfig(ctx)
+
 	cfg := &node.Config{
 		L1:     l1Endpoint,
 		L2:     l2Endpoint,
@@ -84,6 +87,7 @@ func NewConfig(ctx *cli.Context, log log.Logger) (*node.Config, error) {
 			Moniker: ctx.String(flags.HeartbeatMonikerFlag.Name),
 			URL:     ctx.String(flags.HeartbeatURLFlag.Name),
 		},
+		Sync: *syncConfig,
 	}
 	if err := cfg.Check(); err != nil {
 		return nil, err
@@ -190,4 +194,11 @@ func NewSnapshotLogger(ctx *cli.Context) (log.Logger, error) {
 	logger := log.New()
 	logger.SetHandler(handler)
 	return logger, nil
+}
+
+func NewSyncConfig(ctx *cli.Context) *sync.Config {
+	return &sync.Config{
+		EngineP2PEnabled: ctx.Bool(flags.L2EngineP2PEnabled.Name),
+		SkipSanityCheck:  ctx.Bool(flags.SkipSanityCheck.Name),
+	}
 }

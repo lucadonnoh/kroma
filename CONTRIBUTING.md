@@ -140,3 +140,32 @@ To run unit tests for a specific package:
 > cd packages/package-to-test
 > yarn test
 ```
+
+
+--l1.trustrpc
+--l1=wss://wc.easel.kroma.cc
+--l2=http://localhost:8551
+--l2.engine-p2p.enabled=true
+--l2.backup-unsafe-sync-rpc=http://dev-kroma-sail-apne2-vanilla-0.kroma.cc:8545
+--l2.jwt-secret=/Users/logan/Projects/kroma-network/devops-kroma-up/keys/jwt-secret.txt
+--rollup.config=/Users/logan/Projects/kroma-network/devops-kroma-up/config/sail/rollup.json
+--snapshotlog.file=/Users/logan/Projects/kroma-network/devops-kroma-up/logs/snapshot.log
+
+--metrics.addr=0.0.0.0
+--metrics.port=7301
+--metrics.enabled=true
+
+--rpc.addr=0.0.0.0
+--rpc.port=8544
+--rpc.enable-admin=true
+
+--proposer.enabled=false
+--proposer.l1-confs=0
+
+--syncer.l1-confs=0
+
+--p2p.discovery.path=kroma_node_discovery_db_2
+--p2p.peerstore.path=kroma_node_peerstore_db_2
+--p2p.static=/ip4/43.200.87.213/tcp/9003/p2p/16Uiu2HAmHh1piCDZ5bqD2gzY5nrnN8Aakt6E4xeWLCgNoZKGNKT5,/ip4/15.165.246.25/tcp/9003/p2p/16Uiu2HAmN7x7mKBZPGiMvrMeBN3Dn1ZbLzEe8i1vSug2gfCtHLnt
+--p2p.security=none
+--p2p.sync.req-resp=true
